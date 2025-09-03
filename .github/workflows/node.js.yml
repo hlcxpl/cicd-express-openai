@@ -19,8 +19,8 @@ jobs:
       - name: Instalar dependencias
         run: npm install
 
-      # - name: Construir la aplicación
-      #   run: npm run lint
+      - name: Construir la aplicación
+        run: npm run lint
 
   cd_job:
     needs: ci_job # Depende de que el primer job termine, para poder comenzar.

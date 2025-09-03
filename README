@@ -1,0 +1,59 @@
+# cicd-express-openai
+
+openapi: 3.0.3
+info:
+  title: API de Chat
+  version: 1.0.0
+  description: |
+    Este endpoint permite enviar una pregunta a la API de OpenAI y recibir una respuesta generada por el modelo GPT.
+
+paths:
+  /chat:
+    post:
+      summary: Enviar una pregunta al chat
+      description: Envía una pregunta en formato texto y obtiene una respuesta generada por el modelo de lenguaje.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - pregunta
+              properties:
+                pregunta:
+                  type: string
+                  description: Pregunta del usuario que será enviada al modelo.
+                  example: "¿Cuál es la capital de Francia?"
+      responses:
+        "200":
+          description: Respuesta exitosa del modelo.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  respuesta:
+                    type: string
+                    description: Respuesta generada por el modelo.
+                    example: "La capital de Francia es París."
+        "400":
+          description: Error en la petición por datos inválidos o vacíos.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "La pregunta no debe estar vacía"
+        "500":
+          description: Error interno al comunicarse con OpenAI.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Error al obtener la respuesta de OpenAI"
